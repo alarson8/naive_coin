@@ -1,5 +1,5 @@
 require "rspec"
-require_relative "../../lib/block"
+require_relative "../../lib/naive_coin/block"
 
 RSpec.describe Block do
   it "initializes the block correctly" do
