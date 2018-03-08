@@ -1,9 +1,10 @@
 require "rspec"
 require_relative "../../lib/naive_coin/block"
+require_relative "../../lib/naive_coin/genesis_block"
 
 RSpec.describe Block do
   it "initializes the block correctly" do
-    block = Block.new(index: 1, previous_hash: "previous_hash", data: "data") 
+    block = Block.new(index: 1, previous_hash: "previous_hash", data: "data")
 
     expect(block.index).to eq(1)
     expect(block.hash).to eq(Digest::SHA256.hexdigest("1previous_hash#{block.timestamp}data"))
@@ -14,7 +15,7 @@ RSpec.describe Block do
 
   describe ".create_genesis_block" do
     it "creates a block with no previous hash" do
-      genesis_block = Block.create_genesis_block
+      genesis_block = GenesisBlock.instance
 
       expect(genesis_block.index).to eq(0)
       expect(genesis_block.previous_hash).to be_nil

@@ -1,11 +1,12 @@
 require "rspec"
 require_relative "../../lib/naive_coin/block"
 require_relative "../../lib/naive_coin/block_validator"
+require_relative "../../lib/naive_coin/genesis_block"
 
 RSpec.describe BlockValidator do
   describe "#valid?" do
     it "returns true for a valid block" do
-      genesis_block = Block.create_genesis_block
+      genesis_block = GenesisBlock.instance
       current_block = Block.new(index: genesis_block.index + 1,
                              previous_hash: genesis_block.hash,
                              data: "next_block")

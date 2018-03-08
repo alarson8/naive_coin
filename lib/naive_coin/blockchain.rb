@@ -14,6 +14,10 @@ class Blockchain
     valid_genesis_block? && valid_blocks?
   end
 
+  def length
+    chain.length
+  end
+
   private
 
   attr_reader :chain
@@ -23,13 +27,9 @@ class Blockchain
   end
 
   def valid_blocks?
-    chain[1..-1].each do |block|
-      previous_block = chain[block.index - 1]
-      if BlockValidator.new(previous_block: previous_block, current_block: block).invalid?
-        return false
-      end
+    linkings = chain.each_cons(2).to_a
+    linkings.all? do |linking|
+      BlockValidator.new(previous_block: linking.first, current_block: linking.last).valid?
     end
-
-    return true
   end
 end
