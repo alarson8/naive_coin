@@ -8,6 +8,7 @@ class Blockchain
 
   def link(block:)
     @chain << block
+    # Client.new(address).broadcast(block)
   end
 
   def valid?
