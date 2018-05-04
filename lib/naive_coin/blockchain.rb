@@ -1,7 +1,7 @@
 require_relative "./block_validator"
 require_relative "./genesis_block_validator"
 
-class Blockchain
+class Blockchain  
   def initialize(genesis_block:)
     @chain = [genesis_block]
   end
