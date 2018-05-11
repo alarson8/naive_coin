@@ -1,14 +1,13 @@
 require_relative "./block_validator"
 require_relative "./genesis_block_validator"
 
-class Blockchain  
+class Blockchain
   def initialize(genesis_block:)
     @chain = [genesis_block]
   end
 
   def link(block:)
     @chain << block
-    # Client.new(address).broadcast(block)
   end
 
   def valid?
@@ -17,6 +16,14 @@ class Blockchain
 
   def length
     chain.length
+  end
+
+  def [](index)
+   chain[index]
+  end
+
+  def last
+    chain.last
   end
 
   private
