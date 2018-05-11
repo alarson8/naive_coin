@@ -1,8 +1,8 @@
 require_relative 'block'
 class BlockGenerator
   DIFFICULTY = 7
-
   attr_reader :index, :previous_hash, :data
+
   def initialize(index:, previous_hash:, data:)
     @index = index
     @previous_hash = previous_hash
