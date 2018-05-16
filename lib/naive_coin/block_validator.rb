@@ -14,10 +14,6 @@ class BlockValidator
      valid_timestamp?)
   end
 
-  def invalid?
-    !valid?
-  end
-  
   private
 
   attr_reader :previous_block, :current_block
