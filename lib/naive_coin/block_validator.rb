@@ -1,5 +1,3 @@
-require_relative "./calculate_block_hash"
-
 class BlockValidator
   def initialize(previous_block:, current_block:)
     @previous_block = previous_block
@@ -11,7 +9,8 @@ class BlockValidator
      valid_index? &&
      valid_previous_hash? &&
      valid_hash? &&
-     valid_timestamp?)
+     valid_timestamp? &&
+     valid_binary?)
   end
 
   private
@@ -44,5 +43,9 @@ class BlockValidator
 
     (current_timestamp < 1.minute.from_now &&
      previous_timestamp - 1.minute < current_timestamp)
+  end
+
+  def valid_binary?
+    current_block.to_binary.match?(/^0{#{current_block.difficulty}}/)
   end
 end

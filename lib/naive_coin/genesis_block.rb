@@ -1,18 +1,18 @@
 require "singleton"
-require_relative "./calculate_block_hash"
 
 class GenesisBlock
   include Singleton
 
   EPOCH_TIME = 1519427401
 
-  attr_reader :index, :timestamp, :previous_hash, :data, :difficulty
+  attr_reader :index, :timestamp, :previous_hash, :data, :difficulty, :nonce
 
   def initialize
     @index = 0
     @timestamp = EPOCH_TIME
-    @previous_hash = nil
+    @previous_hash = ''
     @data = "genesis"
+    @nonce = 0
     @difficulty = 0
   end
 

@@ -1,5 +1,3 @@
-require_relative "./genesis_block"
-
 class GenesisBlockValidator
   attr_reader :genesis_block
 
