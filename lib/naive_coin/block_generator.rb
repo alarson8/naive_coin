@@ -1,23 +1,21 @@
-require_relative 'block'
 class BlockGenerator
-  DIFFICULTY = 7
-  attr_reader :index, :previous_hash, :data
+  attr_reader :blockchain, :data
 
-  def initialize(index:, previous_hash:, data:)
-    @index = index
-    @previous_hash = previous_hash
+  def initialize(blockchain:, data:)
+    @blockchain = blockchain
     @data = data
   end
 
   def execute!
     nonce = 0
     loop do
-      test_block = Block.new(index: index, previous_hash: previous_hash, data: "#{data}#{nonce}")
-      if test_block.to_binary.match(/^0{#{DIFFICULTY}}/)
-        puts nonce
-        return test_block
+      attempt_block = Block.build_next_block(blockchain: blockchain, data: @data, nonce: nonce)
+      if BlockValidator.new(previous_block: blockchain.last, current_block: attempt_block).valid?
+         blockchain.link(block: attempt_block)
+         puts attempt_block
+         puts "\n\n\n"
+         return blockchain
       end
-      puts "#{nonce}: #{test_block.to_binary.length}"
       nonce += 1
     end
   end
