@@ -10,7 +10,7 @@ class GenesisBlock
   def initialize
     @index = 0
     @timestamp = EPOCH_TIME
-    @previous_hash = ''
+    @previous_hash = nil
     @data = "genesis"
     @nonce = 0
     @difficulty = 0

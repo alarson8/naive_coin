@@ -4,7 +4,7 @@ RSpec.describe CalculateBlockHash do
       block = Factory.build(:block)
       block_hash = CalculateBlockHash.execute(block: block)
 
-      expect(block_hash).to eq(Digest::SHA256.hexdigest("#{block.index}#{block.previous_hash}#{block.timestamp}#{block.data}"))
+      expect(block_hash).to eq(Digest::SHA256.hexdigest("#{block.index}#{block.previous_hash}#{block.timestamp}#{block.data}#{block.nonce}"))
     end
   end
 end
